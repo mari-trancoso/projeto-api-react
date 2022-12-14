@@ -1,10 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Cards from '../../components/Cards/Cards'
+import logoPokemon from "../../assets/logoHeader.svg"
+import { goToPokedexPage } from '../../Router/coordinator'
+import { HeadersContainer, Body } from './HomePage.styled'
+import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { GlobalContext } from '../../context/GlobalContext'
 
 const HomePage = () => {
 
-  const [ pokemons, setPokemons] = useState([])
+  const navigate = useNavigate()
+
+  const context = useContext(GlobalContext)
+
+  const {pokemons, setPokemons, pokedex, setPokedex} = context
+
+  // const [ pokemons, setPokemons] = useState([])
+
+  // const [pokedex, setPokedex] = useState([])
 
   useEffect(()=> {
     fecthPokemons()
@@ -12,7 +26,7 @@ const HomePage = () => {
 
   const fecthPokemons = async () => {
     try {
-      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon`)
+      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=100`)
 
       console.log(response)
 
@@ -29,13 +43,17 @@ const HomePage = () => {
 
   return (
     <>
-      <h1>HomePage</h1>
-      {pokemons.map((pokemon) => {
-        return(
-          <Cards key={pokemon} pokemon={pokemon}/>
-        )
-      })}
-      
+      <HeadersContainer>
+        <img src={logoPokemon} alt="logo Pokemon"/>
+        <button onClick={()=>goToPokedexPage(navigate)}>Pokedéx</button>
+      </HeadersContainer>
+      <Body>
+        {pokemons.map((pokemon) => {
+          return(
+            <Cards key={pokemon} pokemon={pokemon} pokedex={pokedex} setPokedex={setPokedex}/>
+          )
+        })}
+      </Body>
     </>
   )
 }
