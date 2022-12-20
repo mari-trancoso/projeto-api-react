@@ -1,14 +1,19 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { useEffect } from 'react'
 import logoPokemon from "../../assets/logoHeader.svg"
 import { goToHomePage } from '../../Router/coordinator'
+import { GlobalContext } from '../../context/GlobalContext'
 
 const DetailsPage = () => {
   const navigate = useNavigate()
 
   const path = useParams()
+
+  const context = useContext(GlobalContext)
+
+  const { removeFromPokedex, pokemons } = context
 
   const [detailsPokemon, setDetailsPokemon] = useState({})
 
@@ -45,7 +50,7 @@ const DetailsPage = () => {
       <div>
         <button onClick={()=>goToHomePage(navigate)}>Todos Pokémons</button>
         <img src={logoPokemon} alt="logo Pokemon"/>
-        <button>Exlcuir da Pokedéx</button>
+        <button onClick={()=>removeFromPokedex(detailsPokemon)}>Exlcuir da Pokedéx</button>
       </div>
       <div>DetailsPage</div>
       <p>#{path.pokemonId}</p>

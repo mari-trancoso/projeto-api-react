@@ -16,10 +16,6 @@ const HomePage = () => {
 
   const {pokemons, setPokemons, pokedex, setPokedex} = context
 
-  // const [ pokemons, setPokemons] = useState([])
-
-  // const [pokedex, setPokedex] = useState([])
-
   useEffect(()=> {
     fecthPokemons()
   }, [])
