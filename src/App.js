@@ -1,6 +1,7 @@
 import { GlobalContext } from "./context/GlobalContext";
 import Router from "./Router/Router";
 import { useState } from "react";
+import { ChakraProvider } from "@chakra-ui/react";
 
 function App() {
 
@@ -8,18 +9,29 @@ function App() {
 
   const [pokedex, setPokedex] = useState([])
 
+  const removeFromPokedex = (pokemonToRemove) => {
+    const newPokedex = pokedex.filter(
+      (pokemonInPokedex) => pokemonInPokedex.name !== pokemonToRemove.name
+    )
+
+    setPokedex(newPokedex)
+  }
+
   const context = {
     //pokedex: pokedex,
     pokedex,
     setPokedex,
     pokemons,
-    setPokemons
+    setPokemons,
+    removeFromPokedex
   }
 
   return (
-    <GlobalContext.Provider value={context}>
-    <Router/>
-    </GlobalContext.Provider>
+    <ChakraProvider>
+      <GlobalContext.Provider value={context}>
+        <Router/>
+      </GlobalContext.Provider>
+    </ChakraProvider>
   );
 }
 
