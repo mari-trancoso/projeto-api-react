@@ -5,6 +5,9 @@ import { useEffect } from 'react'
 import logoPokemon from "../../assets/logoHeader.svg"
 import { goToHomePage } from '../../Router/coordinator'
 import { GlobalContext } from '../../context/GlobalContext'
+import { HeadersContainer, ButtonHomePage, ButtonRemovePokedex, Body } from './DetailsPage.styled'
+import { Card, Stack, Text, Heading, Button, Image, CardBody, CardFooter, Flex} from '@chakra-ui/react'
+import pokebola from "../../assets/pokebola.png"
 
 const DetailsPage = () => {
   const navigate = useNavigate()
@@ -47,11 +50,46 @@ const DetailsPage = () => {
   
   return (
     <>
-      <div>
-        <button onClick={()=>goToHomePage(navigate)}>Todos Pokémons</button>
+      <HeadersContainer>
+        <ButtonHomePage onClick={()=>goToHomePage(navigate)}>Todos Pokémons</ButtonHomePage>
         <img src={logoPokemon} alt="logo Pokemon"/>
-        <button onClick={()=>removeFromPokedex(detailsPokemon)}>Exlcuir da Pokedéx</button>
-      </div>
+        <ButtonRemovePokedex onClick={()=>removeFromPokedex(detailsPokemon)}>Exlcuir da Pokedéx</ButtonRemovePokedex>
+      </HeadersContainer>
+      <Body>
+        <h1>Detalhes</h1>
+        <Card
+          width={"1000px"}
+          height={"663px"}
+          border={"1px solid red"}
+          alignSelf={"center"}
+          borderRadius={"38px"}
+        >
+          <Flex 
+            flexDirection={"column"}
+          >
+            <Image 
+              src={detailsPokemon.sprites?.front_default} 
+              alt="imagem do pokemon"
+              width={"282px"}
+              height={"282px"}
+              backgroundColor={"white"}
+              margin={"20px"}
+            />
+            <Image 
+              src={detailsPokemon.sprites?.back_default} 
+              alt="imagem do pokemon"
+              width={"282px"}
+              height={"282px"}
+              backgroundColor={"white"}
+              margin={"20px"}
+            />
+          </Flex>
+          <Flex></Flex>
+          <Flex></Flex>
+          <Flex></Flex>
+        </Card>
+      </Body>
+      
       <div>DetailsPage</div>
       <p>#{path.pokemonId}</p>
       <p>{detailsPokemon.name}</p>
