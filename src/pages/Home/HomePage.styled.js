@@ -28,8 +28,9 @@ export const HeadersContainer = styled.div`
 `
 
 export const Body = styled.div`
-    background-color: #8A8A8A;
+    background-color: gray;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
 
 `
