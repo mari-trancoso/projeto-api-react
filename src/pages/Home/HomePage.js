@@ -14,28 +14,11 @@ const HomePage = () => {
 
   const context = useContext(GlobalContext)
 
-  const {pokemons, setPokemons, pokedex, setPokedex} = context
+  const {pokemons, setPokemons, pokedex, setPokedex, fecthPokemons} = context
 
   useEffect(()=> {
     fecthPokemons()
   }, [])
-
-  const fecthPokemons = async () => {
-    try {
-      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon?limit=100`)
-
-      console.log(response)
-
-      setPokemons(response.data.results)
-
-      console.log(pokemons)
-
-    }
-
-    catch(error){
-      console.log(error)
-    }
-  }
 
   return (
     <>
