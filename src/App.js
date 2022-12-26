@@ -34,7 +34,7 @@ function App() {
     pokemons,
     setPokemons,
     removeFromPokedex,
-    fecthPokemons
+    fecthPokemons,
   }
 
   return (

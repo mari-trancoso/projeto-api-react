@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import Cards from '../../components/Cards/Cards'
+import Cards from './Cards'
 import logoPokemon from "../../assets/logoHeader.svg"
 import { goToPokedexPage } from '../../Router/coordinator'
 import { HeadersContainer, Body } from './HomePage.styled'
