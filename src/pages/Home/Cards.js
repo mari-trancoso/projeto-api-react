@@ -1,18 +1,39 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react'
+import React, { useEffect, useState} from 'react'
 import axios from 'axios'
 import { goToDetailsPage} from '../../Router/coordinator'
 import { useNavigate } from 'react-router-dom'
-import { Card, Stack, Text, Heading, Button, Image, CardBody, CardFooter} from '@chakra-ui/react'
+import { Card, Stack, Text, Button, Image, CardBody, Heading} from '@chakra-ui/react'
 import pokebola from "../../assets/pokebola.png"
-import { typesForColor } from '../typesForColorBg'
-import { typeForImage } from '../typesForImage'
+import { typesForColor } from '../../components/typesForColorBg'
+import { typeForImage } from '../../components/typesForImage'
+import Modal from "react-modal"
+
+Modal.setAppElement(`#root`)
 
 const Cards = (props) => {
 
     const navigate = useNavigate()
 
     const [ details, setDetails] = useState({})
+
+    const [modalIsOpen, setModalIsOpen] = useState(false)
+
+    function handleOpenModel () {
+        setModalIsOpen (true)
+    }
+
+    function handleCloseModel () {
+        setModalIsOpen (false)
+    }
+
+    const customStyles = {
+      content: {
+        width: "420px",
+        height: "220px",
+        marginLeft:"30%"
+        
+      }
+    }
 
     useEffect(() => {
         fetchDetails()
@@ -36,14 +57,30 @@ const Cards = (props) => {
       )
       if (!isAlreadyOnPokedex) {
         props.setPokedex([...props.pokedex, pokemon])
-        alert("Gotcha! O pokemon foi add a sua pokedex!")
-      } else{
-        alert("Você já capturou esse Pokemon!")
-      }
+        handleOpenModel()
+      } 
     }
 
   return (
     <>
+    <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={handleCloseModel}
+        style={customStyles}
+      >
+        <Heading
+          fontWeight={"700"}
+          fontSize={"48px"}
+          textAlign={"center"}
+          paddingBottom={"20px"}
+        >Gotcha!
+        </Heading>
+        <Text
+          textAlign={"center"}
+        >
+        O Pokemon foi adicionado a sua Podedex!
+        </Text>
+      </Modal>
       <Card
         variant='outline'
         width={"380px"}

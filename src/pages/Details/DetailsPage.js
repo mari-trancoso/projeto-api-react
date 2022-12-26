@@ -18,7 +18,7 @@ const DetailsPage = () => {
 
   const context = useContext(GlobalContext)
 
-  const { removeFromPokedex, pokemons } = context
+  const { removeFromPokedex, pokemons, pokedex } = context
 
   const [detailsPokemon, setDetailsPokemon] = useState({})
 
@@ -45,13 +45,14 @@ const DetailsPage = () => {
     })
     return(total)
   }
+
   
   return (
     <>
       <HeadersContainer>
         <ButtonHomePage onClick={()=>goToHomePage(navigate)}>Todos Pokémons</ButtonHomePage>
         <img src={logoPokemon} alt="logo Pokemon"/>
-        <ButtonRemovePokedex onClick={()=>removeFromPokedex(detailsPokemon)}>Exlcuir da Pokedéx</ButtonRemovePokedex>
+        <ButtonRemovePokedex onClick={()=>removeFromPokedex(detailsPokemon)}>Excluir da Pokedéx</ButtonRemovePokedex>
       </HeadersContainer>
       <Body>
         <Heading 
